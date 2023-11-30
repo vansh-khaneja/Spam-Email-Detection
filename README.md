@@ -7,4 +7,4 @@ The project is created by using the Naive Bayes MultinomailNB Algorithm from skl
 For testing the model you may use python file spam_email_detector.py where u can give the mail content in the input and you will get the result as output.
 Also give a look at the jupyter notebook spam_detector.ipynb for better understanding using statistics and graphs
 
-##Steps
+## Steps
