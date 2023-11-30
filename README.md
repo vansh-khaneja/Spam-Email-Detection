@@ -1,4 +1,5 @@
 # Spam-Email-Detection
+## Accuracy Rate :- 98.46%
 This Spam Email detection model is able to filter out the mails whether they are spam or not.
 The dataset used for training model is taken from kaggle :- https://www.kaggle.com/datasets
 
