@@ -1,36 +1,28 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
 
 data = pd.read_csv("C:/Users/VANSH KHANEJA/Downloads/spam.csv")
 
-data.head(10)
-
-data.groupby('Category').count()
-
-data.groupby('Category').count().plot(kind='pie',subplots=True)
-
 data['spam'] = data['Category'].apply(lambda x: 1 if x=='spam' else 0)
-data.head()
 
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(data.Message,data.spam)
 
-from sklearn.feature_extraction.text import CountVectorizer
 v = CountVectorizer()
-X_train_count = v.fit_transform(X_train.values)
-X_train_count.toarray()[:2]
+X_train_count = v.fit_transform(data.Message)
 
-from sklearn.naive_bayes import MultinomialNB
 model = MultinomialNB()
-model.fit(X_train_count,y_train)
+model.fit(X_train_count,data.spam)
 
 email = input("Enter subject of email : ")
 
-emails_count = v.transform([email])
-ans = model.predict(emails_count)
-
-if ans == [0]:
-    print("Not a spam mail")
-else:
-    print("Its a spam mail")
+def classify_mail(email):
+    emails_count = v.transform([email])
+    array_of_ans = model.predict(emails_count)
+    for i in array_of_ans:
+        if(i==1):
+            return 'Its a Spam Mail'
+        else:
+            return 'Not a Spam Mail'
     
+print(classify_mail(email))
